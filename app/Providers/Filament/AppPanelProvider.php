@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\EditProfile;
+use App\Filament\Pages\SwitchLanguage;
 use Filament\Auth\MultiFactor\App\AppAuthentication;
 use Filament\Auth\MultiFactor\Email\EmailAuthentication;
 use Filament\Http\Middleware\Authenticate;
@@ -14,14 +15,15 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\Width;
+use Filament\Navigation\MenuItem;
 use Filament\View\PanelsRenderHook;
 use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\HtmlString;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
@@ -77,6 +79,12 @@ class AppPanelProvider extends PanelProvider
 			])
 			->authMiddleware([
 				Authenticate::class,
+			])
+			->userMenuItems([
+				MenuItem::make()
+					->label(fn() => App::getLocale() === 'en' ? 'Bahasa Indonesia' : 'English')
+					->url(fn() => SwitchLanguage::getUrl())
+					->icon('heroicon-o-language'),
 			])
 			->renderHook(
 				PanelsRenderHook::HEAD_END,

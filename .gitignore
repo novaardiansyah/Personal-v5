@@ -29,3 +29,5 @@ Thumbs.db
 CLAUDE.md
 AGENT.md
 Makefile
+deploy/
+setup.sh
