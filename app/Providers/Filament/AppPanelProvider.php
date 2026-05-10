@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\EditProfile;
 use Filament\Auth\MultiFactor\App\AppAuthentication;
 use Filament\Auth\MultiFactor\Email\EmailAuthentication;
 use Filament\Http\Middleware\Authenticate;
@@ -33,22 +34,26 @@ class AppPanelProvider extends PanelProvider
 			->id('app')
 			->path('app')
 			->brandName(config('app.name'))
-      ->spa()
+			->spa()
 			->login()
-			->profile()
+			->registration()
+			->profile(EditProfile::class)
+			->when(config('app.env') === 'production', fn (Panel $panel) => $panel->domain(config('app.url')))
 			->topbar(false)
 			->sidebarCollapsibleOnDesktop()
-      ->maxContentWidth(Width::Full)
+			->maxContentWidth(Width::Full)
 			->passwordReset()
+			->emailVerification()
+			->authGuard('web')
 			->favicon(asset('favicon.png'))
 			->colors([
-				'primary' => Color::Amber,
+				'primary' => Color::Cyan,
 			])
 			->multiFactorAuthentication([
-        AppAuthentication::make(),
-        EmailAuthentication::make()
-          ->codeExpiryMinutes(10),
-      ])
+				AppAuthentication::make(),
+				EmailAuthentication::make()
+					->codeExpiryMinutes(10),
+			])
 			->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
 			->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
 			->pages([
@@ -57,7 +62,7 @@ class AppPanelProvider extends PanelProvider
 			->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
 			->widgets([
 				AccountWidget::class,
-				FilamentInfoWidget::class,
+				// FilamentInfoWidget::class,
 			])
 			->middleware([
 				EncryptCookies::class,
