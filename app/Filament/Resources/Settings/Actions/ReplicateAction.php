@@ -10,7 +10,7 @@ class ReplicateAction
 	public static function make(): Action
 	{
 		return Action::make('replicate')
-			->label(__('general.resources.setting.actions.replicate'))
+			->label(__('setting.actions.replicate'))
 			->icon('heroicon-s-document-duplicate')
 			->color('warning')
 			->action(function (Setting $record, Action $action) {
@@ -21,10 +21,10 @@ class ReplicateAction
 				$newRecord->save();
 
 				$action->success();
-				$action->successNotificationTitle(__('general.resources.setting.notifications.replicated_title'));
+				$action->successNotificationTitle(__('setting.notifications.replicated_title'));
 			})
 			->requiresConfirmation()
-			->modalHeading(__('general.resources.setting.actions.replicate_heading'))
-			->modalDescription(__('general.resources.setting.actions.replicate_description'));
+			->modalHeading(__('setting.actions.replicate_heading'))
+			->modalDescription(__('setting.actions.replicate_description'));
 	}
 }

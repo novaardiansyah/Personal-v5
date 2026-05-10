@@ -29,22 +29,22 @@ class SettingsTable
 					->rowIndex()
 					->label(__('general.labels.row_index')),
 				TextColumn::make('name')
-					->label(__('general.resources.setting.fields.name'))
+					->label(__('setting.fields.name'))
 					->searchable()
 					->toggleable(),
 				TextColumn::make('key')
-					->label(__('general.resources.setting.fields.key'))
+					->label(__('setting.fields.key'))
 					->badge()
 					->searchable()
 					->copyable()
 					->toggleable(),
 				TextColumn::make('value')
-					->label(__('general.resources.setting.fields.value'))
+					->label(__('setting.fields.value'))
 					->searchable()
 					->toggleable()
 					->badge(),
 				TextColumn::make('description')
-					->label(__('general.resources.setting.fields.description'))
+					->label(__('setting.fields.description'))
 					->limit(50)
 					->searchable()
 					->toggleable(),

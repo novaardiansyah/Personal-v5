@@ -41,7 +41,7 @@ class AppPanelProvider extends PanelProvider
 			->login()
 			->registration()
 			->profile(EditProfile::class)
-			->when(config('app.env') === 'production', fn (Panel $panel) => $panel->domain(config('app.url')))
+			->when(config('app.env') === 'production', fn(Panel $panel) => $panel->domain(config('app.url')))
 			->topbar(false)
 			->sidebarCollapsibleOnDesktop()
 			->maxContentWidth(Width::Full)
@@ -49,8 +49,15 @@ class AppPanelProvider extends PanelProvider
 			->emailVerification()
 			->authGuard('web')
 			->favicon(asset('favicon.png'))
-			->colors([
-				'primary' => Color::Cyan,
+			->colors(function () {
+				$color = getSetting('site_theme', 'Cyan');
+				return [
+					'primary' => constant(Color::class . '::' . $color),
+				];
+			})
+			->navigationGroups([
+				__('general.navigation_groups.settings'),
+				__('general.navigation_groups.logs'),
 			])
 			->multiFactorAuthentication([
 				AppAuthentication::make(),

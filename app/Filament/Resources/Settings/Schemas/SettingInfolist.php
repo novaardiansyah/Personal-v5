@@ -15,19 +15,19 @@ class SettingInfolist
 			->components([
 				Section::make([
 					TextEntry::make('name')
-						->label(__('general.resources.setting.fields.name')),
+						->label(__('setting.fields.name')),
 					TextEntry::make('key')
-						->label(__('general.resources.setting.fields.key'))
+						->label(__('setting.fields.key'))
 						->badge()
 						->copyable(),
 					TextEntry::make('value')
-						->label(__('general.resources.setting.fields.value'))
+						->label(__('setting.fields.value'))
 						->badge(),
 					IconEntry::make('has_options')
-						->label(__('general.resources.setting.fields.has_options'))
+						->label(__('setting.fields.has_options'))
 						->boolean(),
 					TextEntry::make('description')
-						->label(__('general.resources.setting.fields.description'))
+						->label(__('setting.fields.description'))
 						->columnSpanFull(),
 				])
 					->columns(2)
