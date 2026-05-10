@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\EditProfile;
 use App\Filament\Pages\SwitchLanguage;
+use App\Http\Middleware\SetLocale;
 use Filament\Auth\MultiFactor\App\AppAuthentication;
 use Filament\Auth\MultiFactor\Email\EmailAuthentication;
 use Filament\Http\Middleware\Authenticate;
@@ -76,6 +77,7 @@ class AppPanelProvider extends PanelProvider
 				SubstituteBindings::class,
 				DisableBladeIconComponents::class,
 				DispatchServingFilamentEvent::class,
+				SetLocale::class,
 			])
 			->authMiddleware([
 				Authenticate::class,

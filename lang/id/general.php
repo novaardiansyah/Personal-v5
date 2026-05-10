@@ -1,0 +1,30 @@
+<?php
+
+return [
+	'navigation_groups' => [
+		'settings'   => 'Pengaturan',
+		'logs'       => 'Log',
+		'operations' => 'Operasional',
+	],
+	'resources' => [
+		'activity_log' => [
+			'label'        => 'Log Aktivitas',
+			'plural_label' => 'Log Aktivitas',
+		],
+	],
+	'actions' => [
+		'create' => 'Buat',
+		'edit'   => 'Ubah',
+		'delete' => 'Hapus',
+		'save'   => 'Simpan',
+		'cancel' => 'Batal',
+		'view'   => 'Lihat',
+	],
+	'labels' => [
+		'row_index'              => '#',
+		'deleted_at'             => 'Dihapus Pada',
+		'created_at'             => 'Dibuat Pada',
+		'updated_at'             => 'Diperbarui Pada',
+		'timestamps_description' => 'Informasi Waktu',
+	],
+];
