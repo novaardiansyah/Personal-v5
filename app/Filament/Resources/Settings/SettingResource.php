@@ -28,6 +28,31 @@ class SettingResource extends Resource
 
 	protected static ?string $recordTitleAttribute = 'name';
 
+	public static function getNavigationGroup(): string
+	{
+		return __('general.navigation_groups.settings');
+	}
+
+	public static function getNavigationLabel(): string
+	{
+		return __('setting.plural_label');
+	}
+
+	public static function getModelLabel(): string
+	{
+		return __('setting.label');
+	}
+
+	public static function getPluralModelLabel(): string
+	{
+		return __('setting.plural_label');
+	}
+
+	public static function getBreadcrumb(): string
+	{
+		return __('setting.label');
+	}
+
 	public static function form(Schema $schema): Schema
 	{
 		return SettingForm::configure($schema);
@@ -45,8 +70,7 @@ class SettingResource extends Resource
 
 	public static function getRelations(): array
 	{
-		return [
-		];
+		return [];
 	}
 
 	public static function getPages(): array

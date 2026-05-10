@@ -22,7 +22,7 @@ class SettingForm
 			->components([
 				Section::make([
 					TextInput::make('name')
-						->label(__('general.resources.setting.fields.name'))
+						->label(__('setting.fields.name'))
 						->required()
 						->live(onBlur: true)
 						->afterStateUpdated(function (Set $set, Get $get) {
@@ -32,7 +32,7 @@ class SettingForm
 						}),
 
 					TextInput::make('key')
-						->label(__('general.resources.setting.fields.key'))
+						->label(__('setting.fields.key'))
 						->required()
 						->maxLength(255)
 						->unique(ignoreRecord: true),
@@ -42,7 +42,7 @@ class SettingForm
 					])
 						->schema([
 							TagsInput::make('options')
-								->label(__('general.resources.setting.fields.options'))
+								->label(__('setting.fields.options'))
 								->placeholder('Enter option values, separated by commas.')
 								->separator(',')
 								->visible(fn (Get $get) => $get('has_options'))
@@ -50,7 +50,7 @@ class SettingForm
 								->columnSpan(2),
 
 							Toggle::make('has_options')
-								->label(__('general.resources.setting.fields.has_options'))
+								->label(__('setting.fields.has_options'))
 								->inline(false)
 								->live(),
 						]),
@@ -59,14 +59,14 @@ class SettingForm
 
 				Section::make([
 					Textarea::make('value')
-						->label(__('general.resources.setting.fields.value'))
+						->label(__('setting.fields.value'))
 						->required()
 						->rows(3)
 						->visible(fn (Get $get) => ! $get('has_options'))
 						->maxLength(255),
 
 					Select::make('value_option')
-						->label(__('general.resources.setting.fields.value_option'))
+						->label(__('setting.fields.value_option'))
 						->required()
 						->visible(fn (Get $get) => $get('has_options'))
 						->native(false)
@@ -80,7 +80,7 @@ class SettingForm
 						}),
 
 					Textarea::make('description')
-						->label(__('general.resources.setting.fields.description'))
+						->label(__('setting.fields.description'))
 						->maxLength(1000)
 						->rows(4),
 				]),
