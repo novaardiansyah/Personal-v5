@@ -32,6 +32,22 @@ function uuid7(): string
 	return textUpper($string);
 }
 
+function toIndonesianCurrency(float $number = 0, int $precision = 0, string $currency = 'Rp', bool $showCurrency = true)
+{
+	$result = 0;
+
+	if ($number < 0) {
+		$result = '-' . $currency . number_format(abs($number), $precision, ',', '.');
+	} else {
+		$result = $currency . number_format($number, $precision, ',', '.');
+	}
+
+	if ($showCurrency)
+		return $result;
+
+	return number_format($number, $precision, ',', '.');
+}
+
 function saveActivityLog(array $data = [], $modelMorph = null): ActivityLog
 {
 	$logData = [

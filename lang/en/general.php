@@ -3,6 +3,7 @@
 return [
 	'navigation_groups' => [
 		'settings' => 'Settings',
+		'payments' => 'Payments',
 		'logs' => 'Logs',
 		'operations' => 'Operations',
 	],
