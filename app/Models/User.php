@@ -6,6 +6,7 @@ use Filament\Auth\MultiFactor\App\Contracts\HasAppAuthentication;
 use Filament\Auth\MultiFactor\Email\Contracts\HasEmailAuthentication;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -14,9 +15,11 @@ use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Storage;
+use App\Observers\UserObserver;
 
 #[Fillable(['name', 'email', 'password', 'app_authentication_secret', 'has_email_authentication', 'avatar_url'])]
 #[Hidden(['password', 'remember_token'])]
+#[ObservedBy(UserObserver::class)]
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail, HasAppAuthentication, HasEmailAuthentication, HasAvatar
 {
 	use HasFactory, Notifiable;
@@ -37,7 +40,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, Has
 			return str_ends_with($this->email, '@' . config('app.domain')) && $this->hasVerifiedEmail();
 		}
 
-		return true;
+		return false;
 	}
 
 	public function getAppAuthenticationSecret(): ?string

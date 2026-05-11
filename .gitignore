@@ -32,3 +32,4 @@ AGENT.md
 Makefile
 deploy/
 setup.sh
+.claude/
