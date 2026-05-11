@@ -1,5 +1,17 @@
 <?php
 
+/*
+ * Project Name: personal-v5
+ * File: PaymentAccountResource.php
+ * Created Date: May 11, 2026
+ * 
+ * Author: Nova Ardiansyah admin@novaardiansyah.id
+ * Website: https://novaardiansyah.id
+ * MIT License: https://github.com/novaardiansyah/personal-v5/blob/main/LICENSE
+ * 
+ * Copyright (c) 2026 Nova Ardiansyah, Org
+ */
+
 namespace App\Filament\Resources\PaymentAccounts;
 
 use App\Filament\Resources\PaymentAccounts\Pages\CreatePaymentAccount;
@@ -81,10 +93,10 @@ class PaymentAccountResource extends Resource
 	public static function getPages(): array
 	{
 		return [
-			'index' => ListPaymentAccounts::route('/'),
+			'index'  => ListPaymentAccounts::route('/'),
 			'create' => CreatePaymentAccount::route('/create'),
-			'view' => ViewPaymentAccount::route('/{record}'),
-			'edit' => EditPaymentAccount::route('/{record}/edit'),
+			'view'   => ViewPaymentAccount::route('/{record}'),
+			'edit'   => EditPaymentAccount::route('/{record}/edit'),
 		];
 	}
 

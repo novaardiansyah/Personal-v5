@@ -1,5 +1,17 @@
 <?php
 
+/*
+ * Project Name: personal-v5
+ * File: PaymentAccountInfolist.php
+ * Created Date: May 11, 2026
+ * 
+ * Author: Nova Ardiansyah admin@novaardiansyah.id
+ * Website: https://novaardiansyah.id
+ * MIT License: https://github.com/novaardiansyah/personal-v5/blob/main/LICENSE
+ * 
+ * Copyright (c) 2026 Nova Ardiansyah, Org
+ */
+
 namespace App\Filament\Resources\PaymentAccounts\Schemas;
 
 use Filament\Infolists\Components\ImageEntry;
@@ -26,6 +38,7 @@ class PaymentAccountInfolist
 						->circular()
 						->size(70),
 				])
+					->description(__('general.labels.general_information'))
 					->columns(3)
 					->collapsible(),
 
