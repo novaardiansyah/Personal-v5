@@ -6,71 +6,70 @@ use Illuminate\Support\Str;
 
 function getSetting(string $key, $default = null)
 {
-  return cache()->rememberForever("setting.{$key}", function () use ($key, $default) {
-    return Setting::where('key', $key)->first()?->value ?? $default;
-  });
+	return cache()->rememberForever("setting.{$key}", function () use ($key, $default) {
+		return Setting::where('key', $key)->first()?->value ?? $default;
+	});
 }
 
 function textCapitalize($text)
 {
-  return trim(ucwords(strtolower($text)));
+	return trim(ucwords(strtolower($text)));
 }
 
 function textUpper($text)
 {
-  return trim(strtoupper($text));
+	return trim(strtoupper($text));
 }
 
 function textLower($text)
 {
-  return trim(strtolower($text));
+	return trim(strtolower($text));
 }
 
 function uuid7(): string
 {
-  $string = Str::uuid7()->toString();
-  return textUpper($string);
+	$string = Str::uuid7()->toString();
+	return textUpper($string);
 }
 
 function saveActivityLog(array $data = [], $modelMorph = null): ActivityLog
 {
-  $logData = [
-    'log_name' => $data['log_name'] ?? 'Resource',
-    'description' => $data['description'] ?? null,
-    'event' => $data['event'] ?? null,
-    'batch_uuid' => $data['batch_uuid'] ?? null,
-    'ip_address' => request()->ip(),
-    'user_agent' => request()->userAgent(),
-    'referer' => request()->header('referer'),
-  ];
+	$logData = [
+		'log_name'    => $data['log_name'] ?? 'Resource',
+		'description' => $data['description'] ?? null,
+		'event'       => $data['event'] ?? null,
+		'batch_uuid'  => $data['batch_uuid'] ?? null,
+		'ip_address'  => request()->ip(),
+		'user_agent'  => request()->userAgent(),
+		'referer'     => request()->header('referer'),
+	];
 
-  $causer = auth()->user();
-  if ($causer) {
-    $logData['causer_type'] = get_class($causer);
-    $logData['causer_id'] = $causer->id;
-  }
+	$causer = auth()->user();
+	if ($causer) {
+		$logData['causer_type'] = get_class($causer);
+		$logData['causer_id'] = $causer->id;
+	}
 
-  if ($modelMorph) {
-    $logData['subject_type'] = get_class($modelMorph);
-    $logData['subject_id'] = $modelMorph->id;
+	if ($modelMorph) {
+		$logData['subject_type'] = get_class($modelMorph);
+		$logData['subject_id'] = $modelMorph->id;
 
-    $attributes = $modelMorph->getAttributes();
-    // Remove hidden attributes
-    $hidden = $modelMorph->getHidden();
-    $attributes = array_diff_key($attributes, array_flip($hidden));
+		$attributes = $modelMorph->getAttributes();
+		$hidden     = $modelMorph->getHidden();
+		$attributes = array_diff_key($attributes, array_flip($hidden));
 
-    if (isset($data['event']) && $data['event'] === 'Updated') {
-      $dirty = $modelMorph->getDirty();
-      $dirty = array_diff_key($dirty, array_flip($hidden));
-      
-      $logData['properties'] = $dirty;
-      $logData['prev_properties'] = array_intersect_key($modelMorph->getOriginal(), $dirty);
-    } else {
-      $logData['properties'] = $attributes;
-    }
-  }
+		if (isset($data['event']) && $data['event'] === 'Updated') {
+			$dirty = $modelMorph->getDirty();
+			$dirty = array_diff_key($dirty, array_flip($hidden));
 
-  $logData = array_merge($logData, $data);
+			$logData['properties'] = $dirty;
+			$logData['prev_properties'] = array_intersect_key($modelMorph->getOriginal(), $dirty);
+		} else {
+			$logData['properties'] = $attributes;
+		}
+	}
 
-  return ActivityLog::create($logData);
+	$logData = array_merge($logData, $data);
+
+	return ActivityLog::create($logData);
 }
