@@ -3,6 +3,7 @@
 return [
 	'navigation_groups' => [
 		'settings' => 'Pengaturan',
+		'payments' => 'Pembayaran',
 		'logs' => 'Log',
 		'operations' => 'Operasional',
 	],
