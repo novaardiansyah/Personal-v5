@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Setting;
+use App\Models\ActivityLog;
 use Illuminate\Support\Str;
 
 function getSetting(string $key, $default = null)
@@ -31,7 +32,7 @@ function uuid7(): string
   return textUpper($string);
 }
 
-function saveActivityLog(array $data = [], $modelMorph = null): \App\Models\ActivityLog
+function saveActivityLog(array $data = [], $modelMorph = null): ActivityLog
 {
   $logData = [
     'log_name' => $data['log_name'] ?? 'Resource',
@@ -71,5 +72,5 @@ function saveActivityLog(array $data = [], $modelMorph = null): \App\Models\Acti
 
   $logData = array_merge($logData, $data);
 
-  return \App\Models\ActivityLog::create($logData);
+  return ActivityLog::create($logData);
 }
