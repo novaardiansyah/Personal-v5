@@ -11,7 +11,7 @@ class SettingObserver
 	{
 		$this->clearCache($setting);
 		saveActivityLog([
-			'event' => 'Created',
+			'event'       => 'Created',
 			'description' => "Created setting {$setting->name}",
 		], $setting);
 	}
@@ -20,7 +20,7 @@ class SettingObserver
 	{
 		$this->clearCache($setting);
 		saveActivityLog([
-			'event' => 'Updated',
+			'event'       => 'Updated',
 			'description' => "Updated setting {$setting->name}",
 		], $setting);
 	}
@@ -29,7 +29,7 @@ class SettingObserver
 	{
 		$this->clearCache($setting);
 		saveActivityLog([
-			'event' => 'Deleted',
+			'event'       => 'Deleted',
 			'description' => "Deleted setting {$setting->name}",
 		], $setting);
 	}
@@ -38,7 +38,7 @@ class SettingObserver
 	{
 		$this->clearCache($setting);
 		saveActivityLog([
-			'event' => 'Restored',
+			'event'       => 'Restored',
 			'description' => "Restored setting {$setting->name}",
 		], $setting);
 	}
@@ -47,7 +47,7 @@ class SettingObserver
 	{
 		$this->clearCache($setting);
 		saveActivityLog([
-			'event' => 'Force Deleted',
+			'event'       => 'Force Deleted',
 			'description' => "Force deleted setting {$setting->name}",
 		], $setting);
 	}
