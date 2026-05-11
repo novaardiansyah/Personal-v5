@@ -11,6 +11,7 @@ return [
 		'current_deposit' => 'Deposit Saat Ini',
 		'new_deposit'     => 'Deposit Baru',
 		'difference'      => 'Selisih',
+		'user_name'       => 'Nama Pengguna',
 	],
 	'actions' => [
 		'audit'       => 'Audit',

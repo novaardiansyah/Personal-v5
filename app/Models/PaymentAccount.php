@@ -1,73 +1,42 @@
 <?php
 
+/*
+ * Project Name: personal-v5
+ * File: PaymentAccount.php
+ * Created Date: May 11, 2026
+ *
+ * Author: Nova Ardiansyah admin@novaardiansyah.id
+ * Website: https://novaardiansyah.id
+ * MIT License: https://github.com/novaardiansyah/personal-v5/blob/main/LICENSE
+ *
+ * Copyright (c) 2026 Nova Ardiansyah, Org
+ */
+
 namespace App\Models;
 
 use App\Observers\PaymentAccountObserver;
+use Illuminate\Database\Eloquent\Attributes\Appends;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Carbon;
 
+#[Fillable(['user_id', 'name', 'deposit', 'logo'])]
+#[Appends(['logo_url'])]
 #[ObservedBy([PaymentAccountObserver::class])]
 class PaymentAccount extends Model
 {
 	use SoftDeletes;
-
-	protected $guarded = ['id'];
-
-	protected $appends = ['logo_url'];
-
-	public const PERMATA_BANK = 1;
-	public const DANA = 2;
-	public const JAGO_BANK = 3;
-	public const TUNAI = 4;
-	public const GOPAY = 5;
-	public const OVO = 6;
-	public const SEA_BANK = 7;
 
 	public function getLogoUrlAttribute(): ?string
 	{
 		return $this->logo ? Storage::disk('public')->url($this->logo) : null;
 	}
 
-	public function payments(): HasMany
+	public function user(): BelongsTo
 	{
-		return $this->hasMany(Payment::class);
-	}
-
-	public function audit(float $newDeposit): array
-	{
-		$currentDeposit = $this->deposit;
-		$diffDeposit = $currentDeposit - $newDeposit;
-		$paymentType = $diffDeposit > 0 ? PaymentType::EXPENSE : PaymentType::INCOME;
-
-		$payment = Payment::create([
-			'code'               => uuid7(), // Using uuid7 as placeholder for getCode
-			'name'               => 'Audit : ' . $this->name,
-			'type_id'            => $paymentType,
-			'user_id'            => auth()->id(),
-			'payment_account_id' => $this->id,
-			'amount'             => abs($diffDeposit),
-			'has_items'          => false,
-			'attachments'        => [],
-			'date'               => Carbon::now()->format('Y-m-d')
-		]);
-
-		$this->update(['deposit' => $newDeposit]);
-
-		return [
-			'payment_account' => $this,
-			'payment'         => $payment,
-			'audit_details'   => [
-				'previous_deposit'    => $currentDeposit,
-				'new_deposit'         => $newDeposit,
-				'difference'          => $diffDeposit,
-				'absolute_difference' => abs($diffDeposit),
-				'adjustment_type'     => $diffDeposit < 0 ? 'increase' : 'decrease',
-				'payment_type'        => $paymentType
-			]
-		];
+		return $this->belongsTo(User::class);
 	}
 }

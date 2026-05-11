@@ -11,6 +11,7 @@ return [
 		'current_deposit' => 'Current Deposit',
 		'new_deposit'     => 'New Deposit',
 		'difference'      => 'Difference',
+		'user_name'       => 'Username',
 	],
 	'actions' => [
 		'audit'       => 'Audit',
