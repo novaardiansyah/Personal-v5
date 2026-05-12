@@ -15,6 +15,7 @@
 namespace App\Filament\Resources\PaymentAccounts\Tables;
 
 use App\Models\PaymentAccount;
+use AuditPaymentAccount;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
@@ -91,48 +92,7 @@ class PaymentAccountsTable
 				ActionGroup::make([
 					ViewAction::make(),
 					EditAction::make(),
-					Action::make('audit')
-						->label(__('payment_account.actions.audit'))
-						->color('info')
-						->icon('heroicon-o-scale')
-						->modalHeading(fn(PaymentAccount $record) => __('payment_account.actions.audit_title', ['name' => $record->name]))
-						->modalWidth(Width::Medium)
-						->form([
-							TextInput::make('current_deposit')
-								->label(__('payment_account.fields.current_deposit'))
-								->readOnly(),
-							TextInput::make('deposit')
-								->label(__('payment_account.fields.new_deposit'))
-								->required()
-								->integer()
-								->numeric()
-								->minValue(0)
-								->autofocus()
-								->live(onBlur: true)
-								->afterStateUpdated(function ($state, Get $get, Set $set) {
-									$current = (float) str_replace(['Rp', '.', ' '], '', $get('current_deposit'));
-									$diff = $current - (float) $state;
-									$diff = $diff > 0 ? -$diff : abs($diff);
-									$set('diff_deposit', (int) $diff);
-								}),
-							TextInput::make('diff_deposit')
-								->label(__('payment_account.fields.difference'))
-								->readOnly(),
-						])
-						->fillForm(fn(PaymentAccount $record): array => [
-							'current_deposit' => $record->deposit ?? 0,
-							'deposit'         => $record->deposit ?? 0,
-							'diff_deposit'    => 0,
-						])
-						->action(function (Action $action, PaymentAccount $record, array $data) {
-							$record->audit((float) $data['deposit']);
-							$action->success();
-							Notification::make()
-								->success()
-								->title(__('payment_account.notifications.audit_success_title'))
-								->body(__('payment_account.notifications.audit_success_body'))
-								->send();
-						}),
+					AuditPaymentAccount::make(),
 					DeleteAction::make(),
 					ForceDeleteAction::make(),
 					RestoreAction::make(),

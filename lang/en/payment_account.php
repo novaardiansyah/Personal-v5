@@ -15,7 +15,7 @@ return [
 	],
 	'actions' => [
 		'audit'       => 'Audit',
-		'audit_title' => 'Audit :name',
+		'audit_title' => 'Audit Payment Account',
 	],
 	'notifications' => [
 		'audit_success_title' => 'Audit Success',
