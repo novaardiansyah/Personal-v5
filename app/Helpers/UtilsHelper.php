@@ -73,3 +73,23 @@ function saveActivityLog(array $data = [], $modelMorph = null): ActivityLog
 
 	return ActivityLog::create($logData);
 }
+
+function money(int|float|null $amount, string $currency = 'IDR', ?string $locale = null, int $divideBy = 1): string
+{
+	if ($amount === null) {
+		return '-';
+	}
+
+	$locale ??= match (strtoupper($currency)) {
+		'IDR' => 'id_ID',
+		'USD' => 'en_US',
+		'EUR' => 'de_DE',
+		'JPY' => 'ja_JP',
+		'GBP' => 'en_GB',
+		default => 'en_US',
+	};
+
+	$formatter = new NumberFormatter($locale, NumberFormatter::CURRENCY);
+
+	return $formatter->formatCurrency($amount / $divideBy, strtoupper($currency));
+}
