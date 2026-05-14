@@ -22,4 +22,11 @@ class EditGenerate extends EditRecord
             RestoreAction::make(),
         ];
     }
+
+    protected function fillForm(): void
+    {
+        $record = $this->getRecord();
+        $record->next_id = $record->getNextId();
+        $this->fillFormWithDataAndCallHooks($record);
+    }
 }
