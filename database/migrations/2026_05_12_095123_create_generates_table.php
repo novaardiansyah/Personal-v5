@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('generates', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('alias')->nullable();
+            $table->string('prefix')->nullable();
+            $table->string('suffix')->nullable();
+            $table->string('separator')->default(now()->translatedFormat('ymd'));
+            $table->unsignedInteger('queue')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

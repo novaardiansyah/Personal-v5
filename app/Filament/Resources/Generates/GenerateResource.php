@@ -22,9 +22,36 @@ class GenerateResource extends Resource
 {
     protected static ?string $model = Generate::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedIdentification;
+
+    protected static ?int $navigationSort = 20;
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    public static function getNavigationGroup(): string
+    {
+        return __('general.navigation_groups.settings');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('generate.plural_label');
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('generate.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('generate.plural_label');
+    }
+
+    public static function getBreadcrumb(): string
+    {
+        return __('generate.label');
+    }
 
     public static function form(Schema $schema): Schema
     {
@@ -43,9 +70,7 @@ class GenerateResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     public static function getPages(): array
