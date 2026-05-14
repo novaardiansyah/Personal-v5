@@ -1,7 +1,21 @@
 <?php
 
+/*
+ * Project Name: personal-v5
+ * File: UtilsHelper.php
+ * Created Date: May 14, 2026
+ *
+ * Author: Nova Ardiansyah admin@novaardiansyah.id
+ * Website: https://novaardiansyah.id
+ * MIT License: https://github.com/novaardiansyah/personal-v5/blob/main/LICENSE
+ *
+ * Copyright (c) 2026 Nova Ardiansyah, Org
+ */
+
 use App\Models\Setting;
 use App\Models\ActivityLog;
+use App\Models\Generate;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 function getSetting(string $key, $default = null)
@@ -92,4 +106,39 @@ function money(int|float|null $amount, string $currency = 'IDR', ?string $locale
 	$formatter = new NumberFormatter($locale, NumberFormatter::CURRENCY);
 
 	return $formatter->formatCurrency($amount / $divideBy, strtoupper($currency));
+}
+
+function getCode(string $alias, bool $isNotPreview = true)
+{
+  $genn = Generate::withTrashed()->where('alias', $alias)->first();
+  $date = now()->translatedFormat('ymd');
+
+  if (!$genn) {
+    $queue = substr($date, 0, 4) . substr(time(), -4) . substr($date, 4, 2);
+    return 'ER-' . $queue;
+  }
+
+  $separator = Carbon::createFromFormat('ymd', $genn->separator)->translatedFormat('ymd');
+
+  $diffMonthAndYear = substr($date, 0, 4) != substr($separator, 0, 4);
+  $maxLimitQueue = 9999;
+
+  if ((int) $genn->queue >= $maxLimitQueue || $diffMonthAndYear) {
+    $genn->queue = 1;
+    $genn->separator = $date;
+  }
+
+  $queue = substr($date, 0, 4) . str_pad($genn->queue, 4, '0', STR_PAD_LEFT) . substr($date, 4, 2);
+
+  if ($genn->prefix)
+    $queue = $genn->prefix . $queue;
+  if ($genn->suffix)
+    $queue .= $genn->suffix;
+
+  if ($isNotPreview) {
+    $genn->queue += 1;
+    $genn->save();
+  }
+
+  return $queue;
 }
