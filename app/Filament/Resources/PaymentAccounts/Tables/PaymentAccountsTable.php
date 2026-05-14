@@ -4,19 +4,17 @@
  * Project Name: personal-v5
  * File: PaymentAccountsTable.php
  * Created Date: May 11, 2026
- * 
+ *
  * Author: Nova Ardiansyah admin@novaardiansyah.id
  * Website: https://novaardiansyah.id
  * MIT License: https://github.com/novaardiansyah/personal-v5/blob/main/LICENSE
- * 
+ *
  * Copyright (c) 2026 Nova Ardiansyah, Org
  */
 
 namespace App\Filament\Resources\PaymentAccounts\Tables;
 
-use App\Models\PaymentAccount;
-use AuditPaymentAccount;
-use Filament\Actions\Action;
+use App\Filament\Resources\PaymentAccounts\Actions\AuditPaymentAccount;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -27,11 +25,6 @@ use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
-use Filament\Forms\Components\TextInput;
-use Filament\Notifications\Notification;
-use Filament\Schemas\Components\Utilities\Get;
-use Filament\Schemas\Components\Utilities\Set;
-use Filament\Support\Enums\Width;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
