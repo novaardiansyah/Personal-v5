@@ -1,5 +1,17 @@
 <?php
 
+/*
+ * Project Name: personal-v5
+ * File: GenerateResource.php
+ * Created Date: May 14, 2026
+ *
+ * Author: Nova Ardiansyah admin@novaardiansyah.id
+ * Website: https://novaardiansyah.id
+ * MIT License: https://github.com/novaardiansyah/personal-v5/blob/main/LICENSE
+ *
+ * Copyright (c) 2026 Nova Ardiansyah, Org
+ */
+
 namespace App\Filament\Resources\Generates;
 
 use App\Filament\Resources\Generates\Pages\CreateGenerate;
@@ -20,74 +32,74 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class GenerateResource extends Resource
 {
-    protected static ?string $model = Generate::class;
+	protected static ?string $model = Generate::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedIdentification;
+	protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedIdentification;
 
-    protected static ?int $navigationSort = 20;
+	protected static ?int $navigationSort = 20;
 
-    protected static ?string $recordTitleAttribute = 'name';
+	protected static ?string $recordTitleAttribute = 'name';
 
-    public static function getNavigationGroup(): string
-    {
-        return __('general.navigation_groups.settings');
-    }
+	public static function getNavigationGroup(): string
+	{
+		return __('general.navigation_groups.settings');
+	}
 
-    public static function getNavigationLabel(): string
-    {
-        return __('generate.plural_label');
-    }
+	public static function getNavigationLabel(): string
+	{
+		return __('generate.plural_label');
+	}
 
-    public static function getModelLabel(): string
-    {
-        return __('generate.label');
-    }
+	public static function getModelLabel(): string
+	{
+		return __('generate.label');
+	}
 
-    public static function getPluralModelLabel(): string
-    {
-        return __('generate.plural_label');
-    }
+	public static function getPluralModelLabel(): string
+	{
+		return __('generate.plural_label');
+	}
 
-    public static function getBreadcrumb(): string
-    {
-        return __('generate.label');
-    }
+	public static function getBreadcrumb(): string
+	{
+		return __('generate.label');
+	}
 
-    public static function form(Schema $schema): Schema
-    {
-        return GenerateForm::configure($schema);
-    }
+	public static function form(Schema $schema): Schema
+	{
+		return GenerateForm::configure($schema);
+	}
 
-    public static function infolist(Schema $schema): Schema
-    {
-        return GenerateInfolist::configure($schema);
-    }
+	public static function infolist(Schema $schema): Schema
+	{
+		return GenerateInfolist::configure($schema);
+	}
 
-    public static function table(Table $table): Table
-    {
-        return GeneratesTable::configure($table);
-    }
+	public static function table(Table $table): Table
+	{
+		return GeneratesTable::configure($table);
+	}
 
-    public static function getRelations(): array
-    {
-        return [];
-    }
+	public static function getRelations(): array
+	{
+		return [];
+	}
 
-    public static function getPages(): array
-    {
-        return [
-            'index' => ListGenerates::route('/'),
-            'create' => CreateGenerate::route('/create'),
-            'view' => ViewGenerate::route('/{record}'),
-            'edit' => EditGenerate::route('/{record}/edit'),
-        ];
-    }
+	public static function getPages(): array
+	{
+		return [
+			'index'  => ListGenerates::route('/'),
+			'create' => CreateGenerate::route('/create'),
+			'view'   => ViewGenerate::route('/{record}'),
+			'edit'   => EditGenerate::route('/{record}/edit'),
+		];
+	}
 
-    public static function getRecordRouteBindingEloquentQuery(): Builder
-    {
-        return parent::getRecordRouteBindingEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
-    }
+	public static function getRecordRouteBindingEloquentQuery(): Builder
+	{
+		return parent::getRecordRouteBindingEloquentQuery()
+			->withoutGlobalScopes([
+				SoftDeletingScope::class,
+			]);
+	}
 }
