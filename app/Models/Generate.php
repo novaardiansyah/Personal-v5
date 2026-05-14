@@ -14,11 +14,14 @@
 
 namespace App\Models;
 
+use App\Observers\GenerateObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[Fillable(['name', 'alias', 'prefix', 'suffix', 'separator', 'queue'])]
+#[ObservedBy([GenerateObserver::class])]
 class Generate extends Model
 {
 	use SoftDeletes;
