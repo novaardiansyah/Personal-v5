@@ -14,9 +14,21 @@
 
 namespace App\Models;
 
+use App\Observers\ItemObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
+#[Fillable(['code', 'type_id', 'name', 'amount'])]
+#[ObservedBy([ItemObserver::class])]
 class Item extends Model
 {
-	//
+	use SoftDeletes;
+
+	public function type(): BelongsTo
+	{
+		return $this->belongsTo(ItemType::class, 'type_id');
+	}
 }
