@@ -27,6 +27,7 @@ class PaymentCategoryInfolist
 						->label(__('payment_category.fields.is_default'))
 						->boolean(),
 				])
+					->description(__('general.labels.general_information'))
 					->columns(4)
 					->collapsible(),
 
