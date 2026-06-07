@@ -13,14 +13,14 @@ class PaymentCategoryObserver
 		}
 
 		if (!$paymentCategory->code) {
-			$paymentCategory->code = uuid7();
+			$paymentCategory->code = getCode('payment_category');
 		}
 	}
 
 	public function updating(PaymentCategory $paymentCategory): void
 	{
 		if (!$paymentCategory->code) {
-			$paymentCategory->code = uuid7();
+			$paymentCategory->code = getCode('payment_category');
 		}
 	}
 

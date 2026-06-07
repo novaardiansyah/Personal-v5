@@ -4,6 +4,7 @@ return [
 	'label' => 'Setting',
 	'plural_label' => 'Settings',
 	'fields' => [
+		'code' => 'Setting ID',
 		'name' => 'Name',
 		'key' => 'Alias',
 		'value' => 'Value',

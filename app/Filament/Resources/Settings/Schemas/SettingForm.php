@@ -21,6 +21,12 @@ class SettingForm
 		return $schema
 			->components([
 				Section::make([
+					TextInput::make('code')
+						->label(__('setting.fields.code'))
+						->disabled()
+						->placeholder('Auto generated')
+						->copyable(),
+
 					TextInput::make('name')
 						->label(__('setting.fields.name'))
 						->required()

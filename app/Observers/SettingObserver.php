@@ -7,6 +7,13 @@ use Illuminate\Support\Facades\Cache;
 
 class SettingObserver
 {
+	public function saving(Setting $setting): void
+	{
+		if (!$setting->code) {
+			$setting->code = getCode('setting');
+		}
+	}
+
 	public function created(Setting $setting): void
 	{
 		$this->clearCache($setting);

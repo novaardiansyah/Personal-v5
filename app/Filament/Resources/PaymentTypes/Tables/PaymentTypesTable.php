@@ -27,6 +27,12 @@ class PaymentTypesTable
 				TextColumn::make('index')
 					->rowIndex()
 					->label(__('general.labels.row_index')),
+				TextColumn::make('code')
+					->label(__('payment_type.fields.code'))
+					->searchable()
+					->copyable()
+					->badge()
+					->toggleable(),
 				TextColumn::make('uid')
 					->label(__('payment_type.fields.uid'))
 					->badge()

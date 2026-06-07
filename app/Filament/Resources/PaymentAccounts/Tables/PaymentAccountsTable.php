@@ -39,6 +39,12 @@ class PaymentAccountsTable
 				TextColumn::make('index')
 					->rowIndex()
 					->label(__('general.labels.row_index')),
+				TextColumn::make('code')
+					->label(__('payment_account.fields.code'))
+					->searchable()
+					->copyable()
+					->badge()
+					->toggleable(),
 				TextColumn::make('user.name')
 					->label(__('payment_account.fields.user_name'))
 					->searchable()

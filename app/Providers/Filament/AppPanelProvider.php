@@ -46,6 +46,7 @@ class AppPanelProvider extends PanelProvider
 			->maxContentWidth(Width::Full)
 			->passwordReset()
 			->emailVerification()
+			->registration()
 			->authGuard('web')
 			->favicon(asset('favicon.png'))
 			->colors(function () {

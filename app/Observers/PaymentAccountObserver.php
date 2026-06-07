@@ -18,10 +18,14 @@ use App\Models\PaymentAccount;
 
 class PaymentAccountObserver
 {
-	public function creating(PaymentAccount $paymentAccount): void
+	public function saving(PaymentAccount $paymentAccount): void
 	{
 		if (!$paymentAccount->user_id) {
 			$paymentAccount->user_id = auth()->id();
+		}
+
+		if (!$paymentAccount->code) {
+			$paymentAccount->code = getCode('payment_account');
 		}
 	}
 

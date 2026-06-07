@@ -5,6 +5,7 @@ return [
 	'plural_label' => 'Akun Pembayaran',
 	'fields' => [
 		'name'            => 'Nama',
+		'code'            => 'ID Akun',
 		'deposit'         => 'Deposit',
 		'logo'            => 'Logo',
 		'logo_url'        => 'Logo',

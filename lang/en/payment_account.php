@@ -5,6 +5,7 @@ return [
 	'plural_label' => 'Payment Accounts',
 	'fields' => [
 		'name'            => 'Name',
+		'code'            => 'Account ID',
 		'deposit'         => 'Deposit',
 		'logo'            => 'Logo',
 		'logo_url'        => 'Logo',

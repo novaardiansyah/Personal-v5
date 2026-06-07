@@ -6,6 +6,13 @@ use App\Models\PaymentType;
 
 class PaymentTypeObserver
 {
+	public function saving(PaymentType $paymentType): void
+	{
+		if (!$paymentType->code) {
+			$paymentType->code = getCode('payment_type');
+		}
+	}
+
 	public function creating(PaymentType $paymentType): void
 	{
 		$paymentType->uid = uuid7();

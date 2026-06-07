@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 
-#[Fillable(['user_id', 'name', 'deposit', 'logo'])]
+#[Fillable(['user_id', 'name', 'code', 'deposit', 'logo'])]
 #[Appends(['logo_url'])]
 #[ObservedBy([PaymentAccountObserver::class])]
 class PaymentAccount extends Model
