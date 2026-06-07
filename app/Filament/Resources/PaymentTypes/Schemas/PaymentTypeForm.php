@@ -13,6 +13,12 @@ class PaymentTypeForm
 		return $schema
 			->components([
 				Section::make([
+					TextInput::make('code')
+						->label(__('payment_type.fields.code'))
+						->disabled()
+						->placeholder('Auto generated')
+						->copyable(),
+
 					TextInput::make('uid')
 						->label(__('payment_type.fields.uid'))
 						->disabled()

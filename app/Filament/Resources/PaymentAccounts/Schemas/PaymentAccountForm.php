@@ -14,6 +14,12 @@ class PaymentAccountForm
 		return $schema
 			->components([
 				Section::make([
+					TextInput::make('code')
+						->label(__('payment_account.fields.code'))
+						->disabled()
+						->placeholder('Auto generated')
+						->copyable(),
+
 					TextInput::make('name')
 						->label(__('payment_account.fields.name'))
 						->required(),

@@ -28,6 +28,12 @@ class SettingsTable
 				TextColumn::make('index')
 					->rowIndex()
 					->label(__('general.labels.row_index')),
+				TextColumn::make('code')
+					->label(__('setting.fields.code'))
+					->searchable()
+					->copyable()
+					->badge()
+					->toggleable(),
 				TextColumn::make('name')
 					->label(__('setting.fields.name'))
 					->searchable()

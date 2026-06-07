@@ -4,6 +4,7 @@ return [
 	'label' => 'Pengaturan',
 	'plural_label' => 'Pengaturan',
 	'fields' => [
+		'code' => 'ID Pengaturan',
 		'name' => 'Nama',
 		'key' => 'Alias',
 		'value' => 'Nilai',
