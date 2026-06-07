@@ -37,8 +37,9 @@ class ItemInfolist
 					TextEntry::make('amount')
 						->label(__('item.fields.amount'))
 						->badge()
-						->state(fn ($record) => money($record->amount)),
+						->state(fn($record) => money($record->amount)),
 				])
+					->description(__('general.labels.general_information'))
 					->columns(2)
 					->collapsible(),
 

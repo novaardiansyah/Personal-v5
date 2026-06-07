@@ -30,6 +30,7 @@ class SettingInfolist
 						->label(__('setting.fields.description'))
 						->columnSpanFull(),
 				])
+					->description(__('general.labels.general_information'))
 					->columns(2)
 					->collapsible(),
 
