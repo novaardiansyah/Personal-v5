@@ -14,11 +14,10 @@ class PaymentTypeInfolist
 		return $schema
 			->components([
 				Section::make([
-					TextEntry::make('uid')
-						->label(__('payment_type.fields.uid'))
+					TextEntry::make('code')
+						->label(__('payment_type.fields.code'))
 						->badge()
-						->copyable()
-						->tooltip(fn (PaymentType $record): string => $record->uid ?? ''),
+						->copyable(),
 					TextEntry::make('name')
 						->label(__('payment_type.fields.name')),
 				])

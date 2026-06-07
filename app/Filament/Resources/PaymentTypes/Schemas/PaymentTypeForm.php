@@ -19,12 +19,6 @@ class PaymentTypeForm
 						->placeholder('Auto generated')
 						->copyable(),
 
-					TextInput::make('uid')
-						->label(__('payment_type.fields.uid'))
-						->disabled()
-						->placeholder('Auto generated')
-						->copyable(),
-
 					TextInput::make('name')
 						->label(__('payment_type.fields.name'))
 						->required(),

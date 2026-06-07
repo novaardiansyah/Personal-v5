@@ -13,18 +13,6 @@ class PaymentTypeObserver
 		}
 	}
 
-	public function creating(PaymentType $paymentType): void
-	{
-		$paymentType->uid = uuid7();
-	}
-
-	public function updating(PaymentType $paymentType): void
-	{
-		if (!$paymentType->uid) {
-			$paymentType->uid = uuid7();
-		}
-	}
-
 	public function created(PaymentType $paymentType): void
 	{
 		saveActivityLog([
