@@ -12,7 +12,7 @@ class PaymentType extends Model
 {
 	use SoftDeletes;
 
-	protected $fillable = ['uid', 'name', 'code'];
+	protected $fillable = ['name', 'code'];
 
 	public const EXPENSE = 1;
 	public const INCOME = 2;

@@ -33,14 +33,6 @@ class PaymentTypesTable
 					->copyable()
 					->badge()
 					->toggleable(),
-				TextColumn::make('uid')
-					->label(__('payment_type.fields.uid'))
-					->badge()
-					->limit(13)
-					->searchable()
-					->copyable()
-					->tooltip(fn (PaymentType $record): string => $record->uid ?? '')
-					->copyableState(fn (PaymentType $record): string => $record->uid ?? ''),
 				TextColumn::make('name')
 					->label(__('payment_type.fields.name'))
 					->searchable()
