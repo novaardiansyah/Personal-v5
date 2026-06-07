@@ -56,6 +56,8 @@ class AppPanelProvider extends PanelProvider
 				];
 			})
 			->navigationGroups([
+				__('general.navigation_groups.payments'),
+				__('general.navigation_groups.items'),
 				__('general.navigation_groups.settings'),
 				__('general.navigation_groups.logs'),
 			])

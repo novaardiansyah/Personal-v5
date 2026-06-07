@@ -6,6 +6,7 @@ return [
 		'payments'   => 'Pembayaran',
 		'logs'       => 'Log',
 		'operations' => 'Operasional',
+		'items'      => 'Barang',
 	],
 	'actions' => [
 		'create' => 'Buat',

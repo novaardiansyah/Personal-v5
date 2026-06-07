@@ -2,7 +2,7 @@
 
 /*
  * Project Name: personal-v5
- * File: Item.php
+ * File: CreateItemType.php
  * Created Date: June 7, 2026
  *
  * Author: Nova Ardiansyah admin@novaardiansyah.id
@@ -12,11 +12,12 @@
  * Copyright (c) 2026 Nova Ardiansyah, Org
  */
 
-namespace App\Models;
+namespace App\Filament\Resources\ItemTypes\Pages;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Filament\Resources\ItemTypes\ItemTypeResource;
+use Filament\Resources\Pages\CreateRecord;
 
-class Item extends Model
+class CreateItemType extends CreateRecord
 {
-	//
+    protected static string $resource = ItemTypeResource::class;
 }
