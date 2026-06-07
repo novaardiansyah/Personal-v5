@@ -6,6 +6,7 @@ return [
 		'payments'   => 'Payments',
 		'logs'       => 'Logs',
 		'operations' => 'Operations',
+		'items'      => 'Items',
 	],
 	'actions' => [
 		'create' => 'Create',
