@@ -14,7 +14,6 @@
 
 namespace App\Filament\Resources\ItemTypes\Schemas;
 
-use App\Models\ItemType;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -33,6 +32,7 @@ class ItemTypeInfolist
 					TextEntry::make('name')
 						->label(__('item_type.fields.name')),
 				])
+					->description(__('general.labels.general_information'))
 					->columns(2)
 					->collapsible(),
 

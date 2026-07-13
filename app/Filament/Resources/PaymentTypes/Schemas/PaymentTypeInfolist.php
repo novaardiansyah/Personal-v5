@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\PaymentTypes\Schemas;
 
-use App\Models\PaymentType;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -21,6 +20,7 @@ class PaymentTypeInfolist
 					TextEntry::make('name')
 						->label(__('payment_type.fields.name')),
 				])
+					->description(__('general.labels.general_information'))
 					->columns(2)
 					->collapsible(),
 
